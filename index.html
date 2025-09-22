@@ -1,89 +1,559 @@
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <title>ada-grasp-ctrl</title>
-    <style>
-      body {
-        font-family: Arial, sans-serif;
-        max-width: 800px;
-        margin: 40px auto;
-        line-height: 1.6;
-        color: #333;
-      }
-      h1,
-      h2 {
-        text-align: center;
-      }
-      .video-container {
-        position: relative;
-        padding-bottom: 56.25%;
-        height: 0;
-        overflow: hidden;
-      }
-      .video-container iframe {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-      }
-      .center {
-        text-align: center;
-      }
-      a {
-        color: #008c99; /* Tiffany blue :) */
-        text-decoration: none;
-      }
-      a:hover {
-        text-decoration: underline;
-      }
-    </style>
-  </head>
-  <body>
-    <h1>
-    Coordinated Contact Control for  <br>  Adaptive Dexterous Grasping Under Uncertainty
-  </h1>
-    <h2>Anonymous Submission</h2>
+<html>
 
-    <p class="center">
-      <!-- <a href="paper.pdf">[Paper PDF]</a> &nbsp;|&nbsp; -->
-      <a href="supplementary.pdf">[Appendix]</a>
-      <!-- <a href="https://arxiv.org/">[arXiv]</a> -->
-    </p>
+<head>
+  <meta charset="utf-8">
+  <meta name="description" content="Coordinated Contact Control for Adaptive Dexterous Grasping Under Uncertainty">
+  <meta name="keywords" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Coordinated Contact Control for Adaptive Dexterous Grasping Under Uncertainty</title>
 
-    <h2>Abstract</h2>
-    <p>
-      While recent research has focused heavily on dexterous grasp pose generation, less attention has been devoted to the execution of planned grasps. Under shape and position uncertainty, open-loop execution often yields uncoordinated contacts, causing undesired in-hand object motion and even grasp failures.
-      To address this, this paper proposes a tactile-driven model predictive controller for adaptive and delicate execution of diverse dexterous grasps.
-      Our approach emphasizes multi-contact coordination across both approaching and grasping phases, with three key novelties: (i) coordination-aware phase separation, (ii) arm–hand coordination to compensate for position errors, and (iii) adaptive force coordination to increase contact forces in a balanced manner.
-      An analytical model is employed to relate contact forces to robot joint motions for predictive control.
-      Our formulation imposes no restrictions on grasp types or contact configurations and integrates seamlessly with state-of-the-art grasp pose generation methods.
-      We validate the approach through large-scale simulations involving 15k grasps across 478 objects on three robotic hands, and real-world experiments on 8 objects. Results demonstrate that our method achieves higher grasp success rates and reduced undesired object movements. 
-    </p>
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 
-    <!-- <h2>Video</h2>
-    <div class="video-container">
-      <iframe
-        src="https://www.youtube.com/embed/XXXXXXXXXXX"
-        frameborder="0"
-        allowfullscreen
-      ></iframe>
-    </div> -->
 
-    <!-- <h2>Results</h2>
-    <p>
-      Simulation study: 15k grasps across 400 objects on three robotic hands.<br />
-      Real-world experiments: 8 everyday objects.<br />
-      Our method achieves higher success rates and reduced undesired motion
-      compared with baselines.
-    </p> -->
 
-    <!-- <h2>Code and Data</h2>
-    <p>
-      <a href="https://github.com/anon-org/anon-repo">[Code Repository]</a
-      ><br />
-      <a href="dataset.zip">[Dataset]</a>
-    </p> -->
-  </body>
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
+
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+  <link rel="stylesheet" href="./static/css/misc.css">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script src="./static/js/bulma-carousel.min.js"></script>
+  <script src="./static/js/bulma-slider.min.js"></script>
+  <script src="./static/js/index.js"></script>
+</head>
+
+<section class="hero">
+  <div class="hero-body">
+    <div class="container is-fullhd">
+      <div class="columns is-centered">
+        <div class="column has-text-centered">
+          <h1 class="title is-1 publication-title">Coordinated Contact Control for<br />
+            Adaptive Dexterous Grasping Under Uncertainty</h1>
+          
+          <div class="is-size-5 publication-authors">
+            <span class="author-block">
+              Anonymous Author(s)
+            </span>
+          </div>
+
+          <div class="column has-text-centered">
+            <div class="is-size-4 publication-authors">
+              <span class="author-block"><b>Submitted to ICRA 2026</b></span>
+            </div>
+          </div>
+
+          <div class="column has-text-centered">
+            <div class="publication-links">
+              <!-- PDF Link. -->
+              <!-- <span class="link-block">
+                <a target="_blank" href="./AdaptiGraph_RSS24.pdf"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fas fa-file-pdf"></i>
+                  </span>
+                  <span>Paper</span>
+                </a>
+              </span> -->
+
+            <!-- Arxiv Link. -->
+            <span class="link-block">
+              <a target="_blank" href="https://ada-grasp-ctrl.github.io"
+                 class="external-link button is-normal is-rounded is-dark">
+                <span class="icon">
+                    <i class="fas fa-file"></i>
+                </span>
+                <span>ArXiv (Comming soon)</span>
+              </a>
+            </span>
+
+             <span class="link-block">
+              <a target="_blank" href="https://ada-grasp-ctrl.github.io"
+                 class="external-link button is-normal is-rounded is-dark">
+                <span class="icon">
+                    <i class="fas fa-file"></i>
+                </span>
+                <span>Appendix</span>
+              </a>
+            </span>
+
+            <!-- Code Link. -->
+            <span class="link-block">
+              <a target="_blank" href="https://ada-grasp-ctrl.github.io"
+                 class="external-link button is-normal is-rounded is-dark">
+                <span class="icon">
+                    <i class="fab fa-github"></i>
+                </span>
+                <span>Code (Comming soon)</span>
+                </a>
+            </span>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+<section class="hero teaser">
+  <div class="container is-max-desktop">
+    <div class="hero-body">
+      <div class="container">
+        <div class="columns is-vcentered  is-centered">
+          <img src='docs/figs/fig1.jpg' width="60%">
+          </br>
+        </div>
+        <br>
+        <h2 class="subtitle has-text-centered">
+          Due to uncertainty, open-loop execution of imperfect planned grasp poses can cause unintended in-hand object
+          movements or grasp failures.
+          This work proposes a tactile-driven model predictive control approach that <b> coordinates multiple contacts
+          </b> during both approaching and grasping,
+          <b>reducing undesired object movements </b> and enabling adaptive, delicate execution of <b>diverse dexterous
+            grasps</b>.
+        </h2>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section class="hero is-light is-small">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-full-width">
+
+          <h2 class="title is-3">Abstract</h2>
+          <div class="content has-text-justified">
+            <p>
+              While recent research has focused heavily on dexterous grasp pose generation, less attention has been
+              devoted to the
+              execution of planned grasps. Under shape and position uncertainty, open-loop execution often yields
+              uncoordinated
+              contacts, causing undesired in-hand object motion and even grasp failures.
+              To address this, this paper proposes a tactile-driven model predictive controller for adaptive and
+              delicate
+              execution of diverse dexterous grasps.
+              Our approach emphasizes multi-contact coordination across both approaching and grasping phases, with three
+              key
+              novelties: (i) coordination-aware phase separation, (ii) arm–hand coordination to compensate for position
+              errors,
+              and (iii) adaptive force coordination to increase contact forces in a balanced manner.
+              An analytical model is employed to relate contact forces to robot joint motions for predictive control.
+              Our formulation imposes no restrictions on grasp types or contact configurations and integrates seamlessly
+              with
+              state-of-the-art grasp pose generation methods.
+              We validate the approach through large-scale simulations involving 15k grasps across 478 objects on three
+              robotic
+              hands, and real-world experiments on 8 objects. Results demonstrate that our method achieves higher grasp
+              success
+              rates and reduced undesired object movements.
+            </p>
+          </div>
+          <br>
+
+          <h2 class="title is-3">Video</h2>
+          <video id="teaser" muted height="100%" width="100%" controls="controls">
+            <source src="docs/videos/whole_hq.mp4" type="video/mp4">
+          </video>
+
+          <!-- <div class="publication-video">
+            <iframe src="https://www.youtube.com/embed/DQHxb4saxQo" frameborder="0" allow="autoplay; encrypted-media"
+              allowfullscreen></iframe> -->
+          <!-- <video id="teaser" autoplay muted loop height="100%" width="100%">
+            <source src="media/videos/main.mp4"
+                    type="video/mp4">
+          </video> -->
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="hero">
+  <div class="hero-body">
+    <div class="columns is-centered has-text-centered">
+      <div class="container is-max-widescreen">
+
+        <h2 class="title is-3">Method Overview</h2>
+        <div class="content has-text-justified">
+          <p>Overview of our tactile-driven coordinated contact control method for adaptive execution of planned grasp
+            poses generated from observations with uncertainty. Our method employs a coordination-aware separation of
+            the approaching and grasping
+            phases, using the criteria of wrench balance. During the approaching phase, the fingers make contact with
+            the object using gentle forces, while coordinated arm motions compensate for object position errors without
+            deviating from the planned finger configurations. Once sufficient contacts are established, the fingers
+            increase contact forces in a balanced manner to reach the desired total grasp force, during which the
+            desired force of each contact is re-allocated in real time to adapt to changes in contact states.
+          </p>
+        </div>
+        <div class="columns is-centered has-text-centered">
+          <div class="column is-fullwidth">
+            <!-- <video id="teaser" autoplay muted loop height="100%" width="100%">
+            <source src="media/videos/method.mp4"
+                    type="video/mp4">
+          </video> -->
+            <div class="column is-fullwidth">
+              <img src="docs/figs/overview.jpg" alt="" width="90%">
+            </div>
+          </div>
+        </div>
+
+        <!-- <br>
+        <h2 class="title is-3">Real-World Task1: Pick up Cube</h2>
+        <div class="content has-text-justified">
+          <p>The robot only needs to grasp the object and lift it, which is designed to specifically analyze the spatial generalizability and sample efficiency of KADP. Since accurately controlling the end-effector pose is sufficient, DP3-EE is expected to perform well due to the alignment between observation and action space.
+          </p>
+        </div>
+        <div class="columns">
+          <div class="column has-text-centered">
+            <video id="dist1" muted autoplay loop width="90%">
+              <source src="videos/pick_up_cube_pose1.mp4" type="video/mp4">
+            </video>
+            <h2 class="title is-5">DP3-EE</h2>
+          </div>
+
+          <div class="column has-text-centered">
+            <video id="dist1" muted autoplay loop width="90%">
+              <source src="videos/pick_up_cube_joint1.mp4" type="video/mp4">
+            </video>
+            <h2 class="title is-5">DP3-Joint</h2>
+          </div>
+
+          <div class="column has-text-centered">
+            <video id="dist1" muted autoplay loop width="90%">
+              <source src="videos/pick_up_cube_node1.mp4" type="video/mp4">
+            </video>
+            <h2 class="title is-5">KADP (Ours)</h2>
+          </div>
+        </div>
+
+        <div class="columns">
+          <div class="column has-text-centered">
+            <video id="dist1" muted autoplay loop width="90%">
+              <source src="videos/pick_up_cube_pose2.mp4" type="video/mp4">
+            </video>
+            <h2 class="title is-5">DP3-EE</h2>
+          </div>
+
+          <div class="column has-text-centered">
+            <video id="dist1" muted autoplay loop width="90%">
+              <source src="videos/pick_up_cube_joint2.mp4" type="video/mp4">
+            </video>
+            <h2 class="title is-5">DP3-Joint</h2>
+          </div>
+
+          <div class="column has-text-centered">
+            <video id="dist1" muted autoplay loop width="90%">
+              <source src="videos/pick_up_cube_node2.mp4" type="video/mp4">
+            </video>
+            <h2 class="title is-5">KADP (Ours)</h2>
+          </div>
+        </div>
+
+
+        <br>
+        <h2 class="title is-3">Real-World Task2: Open Door</h2>
+        <div class="content has-text-justified">
+          <p>The robot should first grasp the handle and then follow a circular trajectory to open the door. Due to the narrow width of the handle, even small grasping positional error from the handle’s center will cause the gripper to lose contact with it in the subsequent motion. Controlling only the end-effector pose is also sufficient but this task is obviously more challenging compared to the pick up cube above.
+          </p>
+        </div>
+        <div class="columns">
+          <div class="column has-text-centered">
+            <video id="dist1" muted autoplay loop width="90%">
+              <source src="videos/open_door_pose1.mp4" type="video/mp4">
+            </video>
+            <h2 class="title is-5">DP3-EE</h2>
+          </div>
+
+          <div class="column has-text-centered">
+            <video id="dist1" muted autoplay loop width="90%">
+              <source src="videos/open_door_joint1.mp4" type="video/mp4">
+            </video>
+            <h2 class="title is-5">DP3-Joint</h2>
+          </div>
+
+          <div class="column has-text-centered">
+            <video id="dist1" muted autoplay loop width="90%">
+              <source src="videos/open_door_node1.mp4" type="video/mp4">
+            </video>
+            <h2 class="title is-5">KADP (Ours)</h2>
+          </div>
+        </div>
+
+        <div class="columns">
+          <div class="column has-text-centered">
+            <video id="dist1" muted autoplay loop width="90%">
+              <source src="videos/open_door_pose2.mp4" type="video/mp4">
+            </video>
+            <h2 class="title is-5">DP3-EE</h2>
+          </div>
+
+          <div class="column has-text-centered">
+            <video id="dist1" muted autoplay loop width="90%">
+              <source src="videos/open_door_joint2.mp4" type="video/mp4">
+            </video>
+            <h2 class="title is-5">DP3-Joint</h2>
+          </div>
+
+          <div class="column has-text-centered">
+            <video id="dist1" muted autoplay loop width="90%">
+              <source src="videos/open_door_node2.mp4" type="video/mp4">
+            </video>
+            <h2 class="title is-5">KADP (Ours)</h2>
+          </div>
+        </div>
+
+        <br>
+        <h2 class="title is-3">Real-World Task3: Put Cube in Cabinet</h2>
+        <div class="content has-text-justified">
+          <p>The robot should first grasp a cube and then put it into a deep and narrow cabinet, which is designed to evaluate whole-body collision avoidance performance. The primary difficulties arise from two factors: 1) The robot must reach near the cabinet's deepest position, which requires the entire robot to remain nearly horizontal to avoid collision with the top surface; 2) The cabinet is only 4cm wider than the gripper, making the successful insertion highly sensitive to even slight positional inaccuracies.
+          </p>
+        </div>
+        <div class="columns">
+          <div class="column has-text-centered">
+            <video id="dist1" muted autoplay loop width="90%">
+              <source src="videos/put_item_pose1.mp4" type="video/mp4">
+            </video>
+            <h2 class="title is-5">DP3-EE</h2>
+          </div>
+
+          <div class="column has-text-centered">
+            <video id="dist1" muted autoplay loop width="90%">
+              <source src="videos/put_item_joint1.mp4" type="video/mp4">
+            </video>
+            <h2 class="title is-5">DP3-Joint</h2>
+          </div>
+
+          <div class="column has-text-centered">
+            <video id="dist1" muted autoplay loop width="90%">
+              <source src="videos/put_item_node1.mp4" type="video/mp4">
+            </video>
+            <h2 class="title is-5">KADP (Ours)</h2>
+          </div>
+        </div>
+
+        <div class="columns">
+          <div class="column has-text-centered">
+            <video id="dist1" muted autoplay loop width="90%">
+              <source src="videos/put_item_pose2.mp4" type="video/mp4">
+            </video>
+            <h2 class="title is-5">DP3-EE</h2>
+          </div>
+
+          <div class="column has-text-centered">
+            <video id="dist1" muted autoplay loop width="90%">
+              <source src="videos/put_item_joint2.mp4" type="video/mp4">
+            </video>
+            <h2 class="title is-5">DP3-Joint</h2>
+          </div>
+
+          <div class="column has-text-centered">
+            <video id="dist1" muted autoplay loop width="90%">
+              <source src="videos/put_item_node2.mp4" type="video/mp4">
+            </video>
+            <h2 class="title is-5">KADP (Ours)</h2>
+          </div>
+        </div>
+
+        <br>
+        <h2 class="title is-3">Real-World Task4: Push Button Elbow</h2>
+        <div class="content has-text-justified">
+          <p>The robot is required to press a button using its elbow instead of the gripper, making it meaningless to control only the end-effector pose. Learning directly from joint space is expected to yield good performance as only the angles of the first 3 joints change during the manipulation process.
+          </p>
+        </div>
+        <div class="columns">
+          <div class="column has-text-centered">
+            <video id="dist1" muted autoplay loop width="90%">
+              <source src="videos/push_button_pose1.mp4" type="video/mp4">
+            </video>
+            <h2 class="title is-5">DP3-EE</h2>
+          </div>
+
+          <div class="column has-text-centered">
+            <video id="dist1" muted autoplay loop width="90%">
+              <source src="videos/push_button_joint1.mp4" type="video/mp4">
+            </video>
+            <h2 class="title is-5">DP3-Joint</h2>
+          </div>
+
+          <div class="column has-text-centered">
+            <video id="dist1" muted autoplay loop width="90%">
+              <source src="videos/push_button_node1.mp4" type="video/mp4">
+            </video>
+            <h2 class="title is-5">KADP (Ours)</h2>
+          </div>
+        </div>
+
+        <div class="columns">
+          <div class="column has-text-centered">
+            <video id="dist1" muted autoplay loop width="90%">
+              <source src="videos/push_button_pose2.mp4" type="video/mp4">
+            </video>
+            <h2 class="title is-5">DP3-EE</h2>
+          </div>
+
+          <div class="column has-text-centered">
+            <video id="dist1" muted autoplay loop width="90%">
+              <source src="videos/push_button_joint2.mp4" type="video/mp4">
+            </video>
+            <h2 class="title is-5">DP3-Joint</h2>
+          </div>
+
+          <div class="column has-text-centered">
+            <video id="dist1" muted autoplay loop width="90%">
+              <source src="videos/push_button_node2.mp4" type="video/mp4">
+            </video>
+            <h2 class="title is-5">KADP (Ours)</h2>
+          </div>
+        </div> -->
+
+
+        <!-- 
+        <div class="columns">
+          <div class="column has-text-centered">
+              <h2 class="title is-5">Rope straightening - w/o Adaptation</h2>
+            <video id="dist1" muted autoplay loop width="99%">
+              <source src="media/videos/planning-rope-1-baseline.mp4" type="video/mp4">
+            </video>
+          </div>
+
+          <div class="column has-text-centered">
+              <h2 class="title is-5">Rope straightening - Ours</h2>
+            <video id="dist2" muted autoplay loop width="99%">
+              <source src="media/videos/planning-rope-1-ours.mp4" type="video/mp4">
+            </video>
+          </div>
+        </div>
+
+        <div class="columns">
+          <div class="column has-text-centered">
+            <h2 class="title is-5">Granular gathering - w/o Adaptation</h2>
+            <video id="dist1" muted autoplay loop width="99%">
+              <source src="media/videos/planning-granular-1-baseline.mp4" type="video/mp4">
+            </video>
+          </div>
+
+          <div class="column has-text-centered">
+            <h2 class="title is-5">Granular gathering - Ours</h2>
+            <video id="dist2" muted autoplay loop width="99%">
+              <source src="media/videos/planning-granular-1-ours.mp4" type="video/mp4">
+            </video>
+          </div>
+        </div>
+
+        <div class="columns">
+          <div class="column has-text-centered">
+            <h2 class="title is-5">Cloth relocating - w/o Adaptation</h2>
+            <video id="dist1" muted autoplay loop width="99%">
+              <source src="media/videos/planning-cloth-1-baseline.mp4" type="video/mp4">
+            </video>
+          </div>
+
+          <div class="column has-text-centered">
+            <h2 class="title is-5">Cloth relocating - Ours</h2>
+            <video id="dist2" muted autoplay loop width="99%">
+              <source src="media/videos/planning-cloth-1-ours.mp4" type="video/mp4">
+            </video>
+          </div>
+        </div>
+
+        <br>
+        <h2 class="title is-3">Example Simulation Data</h2>
+        <div class="columns">
+          <div class="column has-text-centered">
+            <h2 class="title is-5">Granular - Low granularity</h2>
+            <video id="dist1" muted autoplay loop width="99%">
+              <source src="media/videos/sim_granular_size_0.mp4" type="video/mp4">
+            </video>
+          </div>
+
+          <div class="column has-text-centered">
+            <h2 class="title is-5">Granular - High granularity</h2>
+            <video id="dist2" muted autoplay loop width="99%">
+              <source src="media/videos/sim_granular_size_1.mp4" type="video/mp4">
+            </video>
+          </div>
+        </div>
+
+        <div class="columns">
+          <div class="column has-text-centered">
+            <h2 class="title is-5">Rope - Low stiffness</h2>
+            <video id="dist1" muted autoplay loop width="99%">
+              <source src="media/videos/sim_rope_stiff_0.mp4" type="video/mp4">
+            </video>
+          </div>
+
+          <div class="column has-text-centered">
+            <h2 class="title is-5">Rope - High stiffness</h2>
+            <video id="dist2" muted autoplay loop width="99%">
+              <source src="media/videos/sim_rope_stiff_1.mp4" type="video/mp4">
+            </video>
+          </div>
+        </div>
+
+        <div class="columns">
+          <div class="column has-text-centered">
+            <h2 class="title is-5">Cloth - Low stiffness</h2>
+            <video id="dist1" muted autoplay loop width="99%">
+              <source src="media/videos/sim_cloth_stiff_0.mp4" type="video/mp4">
+            </video>
+          </div>
+
+          <div class="column has-text-centered">
+            <h2 class="title is-5">Cloth - High stiffness</h2>
+            <video id="dist2" muted autoplay loop width="99%">
+              <source src="media/videos/sim_cloth_stiff_1.mp4" type="video/mp4">
+            </video>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section class="section" id="BibTeX">
+  <div class="container is-max-widescreen content">
+    <div class="column has-text-centered">
+      <h2 class="title is-3">BibTeX</h2>
+    </div>
+    <pre><code>@inproceedings{zhang2024adaptigraph,
+      title={AdaptiGraph: Material-Adaptive Graph-Based Neural Dynamics for Robotic Manipulation},
+      author={Zhang, Kaifeng and Li, Baoyu and Hauser, Kris and Li, Yunzhu},
+      booktitle={Proceedings of Robotics: Science and Systems (RSS)},
+      year={2024}
+    }</code></pre>
+  </div>
+</section> -->
+
+
+        <footer class="footer">
+          <div class="container">
+            <div class="columns is-centered">
+              <div class="column">
+                <div class="content has-text-centered">
+                  <p>
+                    Website template borrowed from <a href="https://robopil.github.io/adaptigraph/">AdaptiGraph</a>.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </footer>
+
+
+        </body>
+
 </html>
